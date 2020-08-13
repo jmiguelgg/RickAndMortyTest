@@ -7,6 +7,7 @@ import Error from '../components/error'
 const GET_LAUNCHES = gql`{
   characters(page:1,filter:{name:"rick"}){
     results{
+      id
       name
       status
       species
