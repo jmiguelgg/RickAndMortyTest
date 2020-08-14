@@ -39,7 +39,7 @@ const App = () => {
 
     function handlerSearchByName(){
       setSearchByName(name)
-      setPage(null)
+      setPage(1)
     }
     function fillCarouselNumbers(pages){
       let numbers = []
