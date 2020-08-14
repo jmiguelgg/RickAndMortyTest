@@ -17,7 +17,7 @@ const Card = (props) => {
             <div className="w-full lg:flex text-white">
                 <img className="w-full sm:w-full lg:h-auto lg:w-64 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" loading="lazy" src={props.info.image} alt="Character"/>
                 <div className="w-full bg-gray-800 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-                    <div className="mb-8">
+                    <div className="mb-8 h-56">
                         <div className="font-bold text-3xl mb-2">{props.info.name}</div>
                         <p className="text-xl">{iconStatus(props.info.status)}{props.info.status} - {props.info.species}</p>
                         <label className="text-gray-600">Last known location:</label>
