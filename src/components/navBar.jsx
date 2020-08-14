@@ -27,7 +27,7 @@ const NavBar = () => {
                     <Link to="/" onClick={() => setMenuVisible(!menuVisible)} className={buttonConfig}>
                         <span>Home</span>
                     </Link>
-                    <Link to="/about" onClick={() => setMenuVisible(!menuVisible)} className={buttonConfig}>
+                    <Link to="/aboutme" onClick={() => setMenuVisible(!menuVisible)} className={buttonConfig}>
                         <span>About me</span>
                     </Link>
                 </div>
