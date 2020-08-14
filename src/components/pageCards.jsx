@@ -7,7 +7,7 @@ const PageCards = (props) => {
         let newArrayCards = []
 
         props.info.data.characters.results.forEach(element => {
-            newArrayCards.push(<Card key={element.name} info={element}/>)
+            newArrayCards.push(<Card key={element.id} info={element}/>)
         });
         setCards(newArrayCards)
     }
