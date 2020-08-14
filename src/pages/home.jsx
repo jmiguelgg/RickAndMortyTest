@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import Loading from '../components/loading'
 import Error from '../components/error'
 
-const GET_LAUNCHES = gql`{
+const GET_CHARACTERS = gql`{
   characters(page:1,filter:{name:"rick"}){
     results{
       id
@@ -23,7 +23,7 @@ const GET_LAUNCHES = gql`{
 }`
 
 const App = () => {
-    const {loading, error, data} = useQuery(GET_LAUNCHES)
+    const {loading, error, data} = useQuery(GET_CHARACTERS)
     
     if(loading) return(<Loading/>)
     if(error) return <Error className="h-full"/>

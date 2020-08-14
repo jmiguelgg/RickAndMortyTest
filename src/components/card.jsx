@@ -15,7 +15,7 @@ const Card = (props) => {
     return(
         <Link to={'/character?id='+props.info.id}>
             <div className="w-full lg:flex text-white">
-                <img className="h-70 sm:h-70 lg:h-auto lg:w-64 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" loading="lazy" src={props.info.image} alt="Character"/>
+                <img className="w-full sm:w-full lg:h-auto lg:w-64 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" loading="lazy" src={props.info.image} alt="Character"/>
                 <div className="w-full bg-gray-800 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                     <div className="mb-8">
                         <div className="font-bold text-3xl mb-2">{props.info.name}</div>

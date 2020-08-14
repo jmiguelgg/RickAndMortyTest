@@ -10,6 +10,7 @@
     "autoprefixer": "^9.8.6",
     "graphql": "^15.3.0",
     "postcss-cli": "^7.1.1",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
