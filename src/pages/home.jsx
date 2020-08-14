@@ -5,7 +5,7 @@ import Loading from '../components/loading'
 import Error from '../components/error'
 
 const GET_CHARACTERS = gql`
-  query($page: Int!,$name: String!){
+  query($page: Int,$name: String){
     characters(page:$page,filter:{name:$name}){
       info{
         count
@@ -39,6 +39,7 @@ const App = () => {
 
     function handlerSearchByName(){
       setSearchByName(name)
+      setPage(null)
     }
     function fillCarouselNumbers(pages){
       let numbers = []
