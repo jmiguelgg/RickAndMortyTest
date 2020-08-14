@@ -63,10 +63,10 @@ const Character = (props) => {
     if(error) return (<Error className="h-full"/>)
     if(data) {
         return(
-            <div className="container p-10 h-full w-full mx-auto lg:flex text-white">
-                <div className="bg-gray-700 w-full flex flex-row flex-wrap antialiased">
-                    <img className="md:w-1/3 w-full h-70" loading="lazy" src={data.character.image} alt="Character"/>
-                    <div className="md:w-2/3 w-full p-10 flex flex-row flex-wrap">
+            <div className="container p-10  h-full w-full mx-auto text-white">
+                <div className="bg-gray-700 rounded-lg">
+                    <img className="w-full sm:w-1/2 md:w-1/3 mx-auto align-top lg:inline-block rounded-lg" loading="lazy" src={data.character.image} alt="Character"/>
+                    <div className="lg:inline-block max-w-xl px-12 pb-5 lg:p-0 lg:ml-16 text-justify">
                         <div className="mb-8">
                             <h1 className="text-4xl">{data.character.name}</h1>
                             <p className="text-xl">{iconStatus(data.character.status)}{data.character.status} - {data.character.species}</p>

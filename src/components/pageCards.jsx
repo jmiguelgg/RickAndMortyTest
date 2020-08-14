@@ -15,7 +15,7 @@ const PageCards = (props) => {
         generateCards(props.info.page)
     },[props.info.page])
     return(
-        <div className="grid md:grid-flow-row gap-8 md:grid-cols-1 xl:grid-cols-2">
+        <div className="grid md:w-2/3 lg:w-full mx-auto md:grid-flow-row gap-8 md:grid-cols-1 xl:grid-cols-2">
           {cards}
         </div>
     )

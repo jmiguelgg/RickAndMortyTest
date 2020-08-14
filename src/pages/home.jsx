@@ -74,7 +74,7 @@ const App = () => {
       if(error.graphQLErrors[0].extensions.response.status === 404){
         return(
           <div className="container p-10  h-full w-full mx-auto">
-            <div className="w-full lg:w-1/2 mx-auto mb-5">
+            <div className="w-full md:w-2/3 lg:w-1/2 mx-auto mb-5">
               <div className="relative text-gray-600">
                 <form onSubmit={() => handlerSearchByName()}>
                   <input type="text" onChange={(text) => setName(text.target.value)} placeholder="Search" className="w-full bg-white h-12 px-5 pr-10 rounded-full text-lg focus:outline-none"/>
@@ -132,7 +132,7 @@ const App = () => {
     if(data) {
       return(
       <div className="container p-10  h-full w-full mx-auto">
-        <div className="w-full lg:w-1/2 mx-auto mb-5">
+        <div className="w-full md:w-2/3 lg:w-1/2 mx-auto mb-5">
           <div className="relative text-gray-600">
             <form onSubmit={() => handlerSearchByName()}>
               <input type="text" onChange={(text) => setName(text.target.value)} placeholder="Search" className="w-full bg-white h-12 px-5 pr-10 rounded-full text-lg focus:outline-none"/>
