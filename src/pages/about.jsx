@@ -4,7 +4,7 @@ const About = () => {
     const imgProfile = 'https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/102557338_1119234095107050_1040334001357421282_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=iDxAeMEKcFsAX_nWL_S&_nc_ht=scontent.fmex5-1.fna&oh=71cdbc24c0696b004433545679a5239e&oe=5F5CFBE1'
     return(
         <div className="container p-10  h-full w-full mx-auto text-white">
-            <img className="sm:w-1/2 md:w-1/3 mx-auto align-top lg:mx-0 lg:inline-block rounded-lg" src={imgProfile}></img>
+            <img className="sm:w-1/2 md:w-1/3 mx-auto align-top lg:mx-0 lg:inline-block rounded-lg" src={imgProfile} alt="Imagen de perfil de Facebook"></img>
             <div className="lg:inline-block max-w-2xl xl:ml-10 text-justify">
                 <h1 className="text-3xl my-4">José Miguel Gutiérrez Guevara</h1>
                 <p className="text-md md:text-xl my-3">Soy originario de Ciudad de México.</p>
