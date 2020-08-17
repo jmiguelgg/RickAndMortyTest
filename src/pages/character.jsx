@@ -1,40 +1,47 @@
-import React from 'react'
-import { useQuery, gql } from '@apollo/client';
+import React,{useState,useEffect} from 'react'
 import Loading from '../components/loading'
 import Error from '../components/error'
 import queryString from 'query-string'
-
-const GET_CHARACTER = gql`
-    query ($idCharacter: ID!){
-        character(id:$idCharacter){
-            name
-            status
-            species
-            type
-            gender
-            image
-            created
-            episode{
-                name
-                air_date
-                episode
-            }
-            origin{
-                name
-                type
-                dimension
-            }
-            location{
-                name
-                type
-                dimension
-            }
-        }
-    }`
+const axios = require('axios').default;
 
 const Character = (props) => {
     const id = queryString.parse(props.location.search).id
-    const {loading, error, data} = useQuery(GET_CHARACTER,{variables: {idCharacter:id}})
+    const [data,setData] = useState(null)
+    const [loading,setLoading] = useState(true)
+    const [error,setError] = useState(null)
+
+    useEffect(() => {
+        loadCharacter()
+    },[])
+  
+    function loadCharacter() {
+        setLoading(true)
+        setError(null)
+        const res = getCharacter()
+        res.then((res) => {
+          setData(res)
+          setLoading(false)
+        })
+    }
+  
+    async function getCharacter() {
+        try {
+            const character = await axios.get('https://rickandmortyapi.com/api/character/'+id)
+            const origin = await axios.get(character.data.origin.url)
+            const location = await axios.get(character.data.location.url)
+            const episodes = []
+            await Promise.all(character.data.episode.map(async (elem) => {
+                const episode = await axios.get(elem)
+                episodes.push(episode.data)
+            }))
+            return {character:character.data,origin:origin.data,location:location.data,episodes:episodes}
+        } catch (erro) {
+            console.log(erro)
+            setError(erro)
+            setLoading(false)
+        }
+    }
+
     function iconStatus(status){
         let color = 'gray'
         if(status === 'Alive')
@@ -49,7 +56,7 @@ const Character = (props) => {
         let episodeList = []
         episodes.forEach(episode => {
             episodeList.push(
-                <li>
+                <li key={episode.id+'-'+episode.name}>
                     <h3 className="text-2xl">{episode.name}</h3>
                     <p className="text-lg pl-5"><span className="text-sm">Air date: </span>{episode.air_date}</p>
                     <p className="text-lg pl-5"><span className="text-sm">Episode code: </span>{episode.episode}</p>
@@ -77,29 +84,29 @@ const Character = (props) => {
                             <label className="text-gray-600">First seen in:</label>
                             <ul className="list-disc pl-5">
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Name: </span>{data.character.origin.name}</p>
+                                    <p className="text-xl"><span className="text-sm">Name: </span>{data.origin.name}</p>
                                 </li>
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Type: </span>{data.character.origin.type}</p>
+                                    <p className="text-xl"><span className="text-sm">Type: </span>{data.origin.type}</p>
                                 </li>
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Dimension: </span>{data.character.origin.dimension}</p>
+                                    <p className="text-xl"><span className="text-sm">Dimension: </span>{data.origin.dimension}</p>
                                 </li>
                             </ul>
                             <label className="text-gray-600">Last known location:</label>
                             <ul className="list-disc pl-5">
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Name: </span>{data.character.location.name}</p>
+                                    <p className="text-xl"><span className="text-sm">Name: </span>{data.location.name}</p>
                                 </li>
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Type: </span>{data.character.location.type}</p>
+                                    <p className="text-xl"><span className="text-sm">Type: </span>{data.location.type}</p>
                                 </li>
                                 <li>
-                                    <p className="text-xl"><span className="text-sm">Dimension: </span>{data.character.location.dimension}</p>
+                                    <p className="text-xl"><span className="text-sm">Dimension: </span>{data.location.dimension}</p>
                                 </li>
                             </ul>
                             <label className="text-gray-600">Episodes:</label>
-                            {fillEpisodes(data.character.episode)}
+                            {fillEpisodes(data.episodes)}
                         </div>
                     </div>
                 </div>

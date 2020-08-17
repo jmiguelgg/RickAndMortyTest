@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import PageCards from '../components/pageCards'
 import Loading from '../components/loading'
 import Error from '../components/error'
-const axios = require('axios').default;
+const axios = require('axios').default
 
 const App = () => {
     const [name,setName] = useState('')
@@ -25,6 +25,7 @@ const App = () => {
       res.then((res) => {
         setData({characters:res})
         setLoading(false)
+        setName('')
       })
     }
 
