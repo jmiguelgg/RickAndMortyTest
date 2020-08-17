@@ -1,50 +1,47 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import PageCards from '../components/pageCards'
-import { useQuery, gql } from '@apollo/client';
 import Loading from '../components/loading'
 import Error from '../components/error'
-
-const GET_CHARACTERS = gql`
-  query($page: Int,$name: String){
-    characters(page:$page,filter:{name:$name}){
-      info{
-        count
-        pages
-        next
-        prev
-      }
-      results{
-        id
-        name
-        status
-        species
-        image
-        location{
-          name
-        }
-        origin{
-          name
-        }
-      }
-    }
-  }`
+const axios = require('axios').default;
 
 const App = () => {
-    const [searchByName,setSearchByName] = useState('')
     const [name,setName] = useState('')
     const [page,setPage] = useState(1)
+    const [data,setData] = useState(null)
+    const [loading,setLoading] = useState(true)
+    const [error,setError] = useState(null)
     const [pageNumbersCarousel, setPageNumberCarousel] = useState([1,2,3,4,5,6])
-    const {loading, error, data} = useQuery(GET_CHARACTERS,{variables:{page:page,name:searchByName}})
     const styleToConcat = "h-10 w-10 flex justify-center items-center sm:flex cursor-pointer leading-5 transition duration-150 ease-in rounded-full "
 
-    function handlerSearchByName(){
-      setSearchByName(name)
-      setPage(1)
+    useEffect(() => {
+      loadCharacters(page)
+    },[])
+
+    function loadCharacters(newPage) {
+      setLoading(true)
+      setError(null)
+      setPage(newPage)
+      const res = getCharacters(newPage)
+      res.then((res) => {
+        setData({characters:res})
+        setLoading(false)
+      })
     }
+
+    async function getCharacters(newPage) {
+      try {
+        const response = await axios.get('https://rickandmortyapi.com/api/character/?page='+newPage+'&name='+name)
+        return response.data
+      } catch (erro) {
+        setError(erro.response.status)
+        setLoading(false)
+      }
+    }
+
     function fillCarouselNumbers(pages){
       let numbers = []
       for (let i = 0; i < 6 && i < pages; i++) {
-        numbers.push(<div key={i} className={page === pageNumbersCarousel[i] ? styleToConcat+"bg-teal-600 text-white":styleToConcat} onClick={() => setPage(pageNumbersCarousel[i])}>{pageNumbersCarousel[i]}</div>)
+        numbers.push(<div key={i} className={page === pageNumbersCarousel[i] ? styleToConcat+"bg-teal-600 text-white":styleToConcat} onClick={() => loadCharacters(pageNumbersCarousel[i])}>{pageNumbersCarousel[i]}</div>)
       }
       return numbers
     }
@@ -71,14 +68,14 @@ const App = () => {
 
     if(loading) return(<Loading/>)
     if(error) {
-      if(error.graphQLErrors[0].extensions.response.status === 404){
+      if(error === 404){
         return(
           <div className="container p-10  h-full w-full mx-auto">
             <div className="w-full md:w-2/3 lg:w-1/2 mx-auto mb-5">
               <div className="relative text-gray-600">
-                <form onSubmit={() => handlerSearchByName()}>
+                <form onSubmit={() => loadCharacters(1)}>
                   <input type="text" onChange={(text) => setName(text.target.value)} placeholder="Search" className="w-full bg-white h-12 px-5 pr-10 rounded-full text-lg focus:outline-none"/>
-                  <button type="submit" onClick={() => handlerSearchByName()} className="absolute right-0 top-0 mt-4 mr-4">
+                  <button type="submit" onClick={() => loadCharacters(1)} className="absolute right-0 top-0 mt-4 mr-4">
                     <svg className="h-5 w-5 fill-current" viewBox="0 0 56.966 56.966" space="preserve" width="512px" height="512px">
                       <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
                     </svg>
@@ -134,9 +131,9 @@ const App = () => {
       <div className="container p-10  h-full w-full mx-auto">
         <div className="w-full md:w-2/3 lg:w-1/2 mx-auto mb-5">
           <div className="relative text-gray-600">
-            <form onSubmit={() => handlerSearchByName()}>
+            <form onSubmit={() => loadCharacters(1)}>
               <input type="text" onChange={(text) => setName(text.target.value)} placeholder="Search" className="w-full bg-white h-12 px-5 pr-10 rounded-full text-lg focus:outline-none"/>
-              <button type="submit" onClick={() => handlerSearchByName()} className="absolute right-0 top-0 mt-4 mr-4">
+              <button type="submit" onClick={() => loadCharacters(1)} className="absolute right-0 top-0 mt-4 mr-4">
                 <svg className="h-5 w-5 fill-current" viewBox="0 0 56.966 56.966" space="preserve" width="512px" height="512px">
                   <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"/>
                 </svg>
