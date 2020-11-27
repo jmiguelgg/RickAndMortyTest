@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import Loading from '../components/loading'
 import Error from '../components/error'
 import queryString from 'query-string'
+import { Link } from 'react-router-dom';
 
 const GET_CHARACTER = gql`
     query ($idCharacter: ID!){
@@ -68,7 +69,12 @@ const Character = (props) => {
                     <img className="w-full sm:w-1/2 md:w-1/3 mx-auto align-top lg:inline-block rounded-lg" loading="lazy" src={data.character.image} alt="Character"/>
                     <div className="lg:inline-block max-w-xl px-12 pb-5 lg:p-0 lg:ml-16 text-justify">
                         <div className="mb-8">
-                            <h1 className="text-4xl">{data.character.name}</h1>
+                            <div className="flex flex-row ">
+                                <h1 className="text-4xl">{data.character.name}</h1>
+                                <Link to={'/shop'}>
+                                    <img className="w-10 my-2 mx-40" src="https://www.flaticon.com/svg/static/icons/svg/985/985691.svg" />
+                                </Link>
+                            </div>
                             <p className="text-xl">{iconStatus(data.character.status)}{data.character.status} - {data.character.species}</p>
                             <label className="text-gray-500">Subspecies of the character:</label>
                             <p className="text-xl">{data.character.type}</p>

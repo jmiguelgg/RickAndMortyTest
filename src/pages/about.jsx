@@ -27,9 +27,14 @@ const About = () => {
                 <p className="text-md md:text-xl my-3">Estoy desarrolando esta página para ayudar a mi primo en su nuevo negocio que va iniciando al desarrollar su página para dar a conocer mas de esta caricatura y poder tener una mejor difusión de la página web.</p>
                 <p className="text-md md:text-xl my-3">El desarrollo de esta página web ha sido implementado desde mi octavo cuatrimestre de la carrera con el fin de plamar mis conocimientos y ayudar a generar una página web.</p>
                 <p className="text-md md:text-xl my-3">Contacto: 55-27-11-89-58.</p>
-                <a className="w-full mx-auto" href="https://www.facebook.com/derianalejandro.garciaduran">
-                    <img source="https://www.sistemaimpulsa.com/blog/wp-content/uploads/2019/12/facebook-logo-redondo-PNG.png"/>
-                </a>
+                <div className="flex flex-row">
+                    <a target="_blank" href="https://www.facebook.com/derianalejandro.garciaduran">
+                        <img className="w-1/3" src="https://www.sistemaimpulsa.com/blog/wp-content/uploads/2019/12/facebook-logo-redondo-PNG.png"/>
+                    </a>
+                    <a target="_blank" href="https://www.instagram.com/_derian_gar/">
+                        <img className="w-1/6" src="https://www.pngkey.com/png/full/283-2831746_insta-icon-instagram.png"/>
+                    </a>
+                </div>
             </div>
         </div>
     )
