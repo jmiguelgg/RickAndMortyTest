@@ -1,7 +1,7 @@
 import React from 'react'
 
 const About = () => {
-    const imgProfile = 'https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/102557338_1119234095107050_1040334001357421282_o.jpg?_nc_cat=109&_nc_sid=09cbfe&_nc_ohc=iDxAeMEKcFsAX_nWL_S&_nc_ht=scontent.fmex5-1.fna&oh=71cdbc24c0696b004433545679a5239e&oe=5F5CFBE1'
+    const imgProfile = 'https://scontent.fmex5-1.fna.fbcdn.net/v/t1.0-9/102557338_1119234095107050_1040334001357421282_o.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeF5E3HrxutSHUh41AXbw-dxAinF_gfs4McCKcX-B-zgxwD4bo7H2ylnOTqXlCm3LOV64f-QKolVRuPa-LbpIZGp&_nc_ohc=sCfboQ2P-e4AX9QLkUj&_nc_ht=scontent.fmex5-1.fna&oh=b557778f651f81a45c8bbb562dc6fe5f&oe=6016DF61'
     return(
         <div className="container p-10  h-full w-full mx-auto text-white">
             <img className="sm:w-1/2 md:w-1/3 mx-auto align-top lg:mx-0 lg:inline-block rounded-lg" src={imgProfile}></img>
